@@ -47,6 +47,7 @@
         [92, 95, 3, 310]
       ].map(function(rect) {
         var canvas = document.createElement('canvas');
+        // adding 1px padding around element for smoother rendering (working around Chrome issue)
         canvas.width = rect[0] + 2;
         canvas.height = rect[1] + 2;
         canvas.getContext('2d').drawImage(img, rect[2], rect[3], rect[0], rect[1], 1, 1, rect[0], rect[1]);

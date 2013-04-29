@@ -3,7 +3,7 @@
     this.normalShips = 50;
     this.jankyShips = 10;
     this.speed = 100;
-    this.speedVariance = 60;
+    this.speedVariance = 50;
     this.jankiness = 0.1;
 
     this._canvas = canvas;
