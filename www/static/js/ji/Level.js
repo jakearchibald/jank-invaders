@@ -19,7 +19,7 @@
     var ship;
 
     for (var i = this.normalShips + this.jankyShips; i--;) {
-      ship = new ji.Ship();
+      ship = ji.Ship.random();
       do {
         ship.y = Math.random() * (this._canvas.height - ship.height);
         ship.x = -ship.width - Math.random() * this._canvas.width;
@@ -62,7 +62,6 @@
 
       lastTime = time;
       context.clearRect(0, 0, level._canvas.width, level._canvas.height);
-      context.fillStyle = '#0f0';
 
       if (level._pendingClick) {
         ship = level._getIntersectingShip(level._pendingClick.clientX, level._pendingClick.clientY, 1, 1);
@@ -84,7 +83,7 @@
         if (ship.active) {
           ship.tick(timePassed);
           if (ship.active) {
-            context.fillRect(ship.renderX, ship.y, ship.width, ship.height);
+            context.drawImage(ship.sprite, ship.renderX, ship.y);
           }
         }
       }

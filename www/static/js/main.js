@@ -5,8 +5,10 @@
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
 
-  var level = new ji.Level(canvas);
-  level.play();
+  ji.Ship.load().then(function() {
+    var level = new ji.Level(canvas);
+    level.play();
 
-  window.level = level;
+    window.level = level;
+  });
 }());
