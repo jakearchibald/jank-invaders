@@ -6,23 +6,31 @@
     this.height = 20;
     this.xMax = 0;
     this.xVel = 0; // pixels per second
-    this.janky = false;
+    this.jankiness = 0;
     this.loop = true;
     this.active = true;
+
+    // actual position x, this allows us to track
+    // intended position but jank on this.x
+    this._posX = 0;
   }
 
   var ShipProto = Ship.prototype;
 
   ShipProto.tick = function(timePassed) {
-    this.x = this.x + this.xVel * timePassed/1000;
+    this._posX = this._posX + this.xVel * timePassed/1000;
 
-    if (this.x > this.xMax) {
+    if (this._posX > this.xMax) {
       if (this.loop) {
-        this.x = -this.width;
+        this._posX = -this.width;
       }
       else {
         this.active = false;
       }
+    }
+
+    if (!this.jankiness || Math.random() + this.jankiness < 1) {
+      this.x = this._posX;
     }
   };
 

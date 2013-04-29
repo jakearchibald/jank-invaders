@@ -4,6 +4,7 @@
     this.jankyShips = 3;
     this.speed = 100;
     this.speedVariance = 50;
+    this.jankiness = 0.1;
 
     this._canvas = canvas;
     this._context = canvas.getContext('2d');
@@ -21,7 +22,7 @@
       ship.x = -ship.width;
       ship.xMax = this._canvas.width;
       ship.xVel = this.speed + (Math.random() * (this.speedVariance * 2)) - this.speedVariance;
-      ship.janky = i < this.jankyShips;
+      ship.jankiness = i < this.jankyShips ? this.jankiness : 0;
       this._ships.push(ship);
     }
 
