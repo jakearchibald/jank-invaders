@@ -1,7 +1,7 @@
 (function() {
   function Level(canvas) {
-    this.normalShips = 20;
-    this.jankyShips = 3;
+    this.normalShips = 50;
+    this.jankyShips = 10;
     this.speed = 100;
     this.speedVariance = 50;
     this.jankiness = 0.1;
@@ -46,7 +46,7 @@
         if (ship.active) {
           ship.tick(timePassed);
           if (ship.active) {
-            context.fillRect(ship.x, ship.y, ship.width, ship.height);
+            context.fillRect(ship.renderX, ship.y, ship.width, ship.height);
           }
         }
       }
