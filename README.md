@@ -1,3 +1,3 @@
-# Basic express app for low-level frontend development
+# Jank invaders
 
-Featuring grunt & sass
+A little mini-game thing about frames-per-second.
