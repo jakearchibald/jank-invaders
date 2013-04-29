@@ -9,7 +9,7 @@
     this.xMax = 0;
     this.xVel = 0; // in pixels per second
     // 0 - skip no frames
-    // 1 - skip all frames
+    // 1 - skip all frames (0.1 is a good value)
     this.jankiness = 0;
     this.loop = true;
     this.active = true;
