@@ -74,8 +74,7 @@
           else {
             level.normalShips--;
           }
-          console.log("Normal", level.normalShips);
-          console.log("Janky", level.jankyShips);
+          console.log("Normal", level.normalShips, "Janky", level.jankyShips);
         }
         level._pendingClick = null;
       }
