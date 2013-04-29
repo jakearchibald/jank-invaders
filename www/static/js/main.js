@@ -7,4 +7,6 @@
 
   var level = new ji.Level(canvas);
   level.play();
+
+  window.level = level;
 }());

@@ -3,12 +3,14 @@
     this.normalShips = 50;
     this.jankyShips = 10;
     this.speed = 100;
-    this.speedVariance = 50;
+    this.speedVariance = 60;
     this.jankiness = 0.1;
 
     this._canvas = canvas;
     this._context = canvas.getContext('2d');
     this._ships = [];
+    // store clicks here
+    this._pendingClick = null;
   }
 
   var LevelProto = Level.prototype;
@@ -28,6 +30,8 @@
       this._ships.push(ship);
     }
 
+    this._canvas.addEventListener('click', this._onCanvasClick.bind(this));
+
     this._gameLoop();
   };
 
@@ -44,7 +48,7 @@
         return ship;
       }
     }
-    return false;
+    return null;
   };
 
   LevelProto._gameLoop = function() {
@@ -54,11 +58,28 @@
 
     function frame(time) {
       var timePassed = time - lastTime;
+      var ship;
+
       lastTime = time;
       context.clearRect(0, 0, level._canvas.width, level._canvas.height);
       context.fillStyle = '#0f0';
 
-      var ship;
+      if (level._pendingClick) {
+        ship = level._getIntersectingShip(level._pendingClick.clientX, level._pendingClick.clientY, 1, 1);
+        if (ship) {
+          ship.active = false;
+          if (ship.jankiness) {
+            level.jankyShips--;
+          }
+          else {
+            level.normalShips--;
+          }
+          console.log("Normal", level.normalShips);
+          console.log("Janky", level.jankyShips);
+        }
+        level._pendingClick = null;
+      }
+      
       for (var i = 0, len = level._ships.length; i < len; i++) {
         ship = level._ships[i];
         if (ship.active) {
@@ -76,6 +97,11 @@
       lastTime = time;
       requestAnimationFrame(frame);
     });
+  };
+
+  LevelProto._onCanvasClick = function(event) {
+    this._pendingClick = event;
+    event.preventDefault();
   };
 
   ji.Level = Level;
