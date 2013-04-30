@@ -2,6 +2,9 @@ html {
   margin: 0;
   padding: 0;
   background: #000;
+  background-image: url(imgs/stars.png), url(imgs/nebula.jpg);
+  background-size: auto, cover;
+  background-repeat: repeat, no-repeat;
 }
 body {
   margin: 0;
