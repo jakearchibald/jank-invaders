@@ -11,6 +11,8 @@
     this._ships = [];
     // store clicks here
     this._pendingClick = null;
+    // at the end of a level, the ships warp away
+    this._warpAway = false;
   }
 
   var LevelProto = Level.prototype;
@@ -63,6 +65,7 @@
     function frame(time) {
       var timePassed = time - lastTime;
       var ship;
+      var i;
 
       lastTime = time;
       context.clearRect(0, 0, level._canvas.width, level._canvas.height);
@@ -77,14 +80,23 @@
           else {
             level.normalShips--;
           }
+          if (!level.jankyShips || !level.normalShips) {
+            level._warpAway = true;
+            for (i = 0, len = level._ships.length; i < len; i++) {
+              level._ships[i].loop = false;
+            }
+          }
           console.log("Normal", level.normalShips, "Janky", level.jankyShips);
         }
         level._pendingClick = null;
       }
       
-      for (var i = 0, len = level._ships.length; i < len; i++) {
+      for (i = 0, len = level._ships.length; i < len; i++) {
         ship = level._ships[i];
         if (ship.active) {
+          if (level._warpAway) {
+            ship.xVel *= 1.05;
+          }
           ship.tick(timePassed);
           if (ship.active) {
             context.drawImage(ship.sprite, ship.renderX, ship.y);
