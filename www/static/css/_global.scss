@@ -1,10 +1,10 @@
 html {
   margin: 0;
   padding: 0;
-  background: #000;
-  background-image: url(imgs/stars.png), url(imgs/nebula.jpg);
+  background: url(imgs/stars.png), url(imgs/nebula.jpg) no-repeat;
   background-size: auto, cover;
-  background-repeat: repeat, no-repeat;
+  background-color: #000;
+  height: 100%;
 }
 body {
   margin: 0;
