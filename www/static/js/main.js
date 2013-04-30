@@ -5,7 +5,10 @@
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
 
-  ji.Ship.load().then(function() {
+  Q.all([
+    ji.Ship.load(),
+    ji.Explosion.load()
+  ]).then(function() {
     var level = new ji.Level(canvas);
     level.play();
 

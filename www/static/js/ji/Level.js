@@ -10,7 +10,7 @@
     this._context = canvas.getContext('2d');
     this._ships = [];
     this._shot = new ji.Shot();
-    this._explosion = new ji.Explosion();
+    this._explosions = [new ji.Explosion(), new ji.Explosion()];
     // store clicks here
     this._pendingClick = null;
     // at the end of a level, the ships warp away
@@ -70,6 +70,7 @@
     function frame(time) {
       var timePassed = time - lastTime;
       var ship;
+      var explosion;
       var i;
 
       lastTime = time;
@@ -106,7 +107,10 @@
         ship = level._getIntersectingShip(level._shot.x, level._shot.y, 1, 1);
         if (ship) {
           ship.active = false;
-          level._explosion.start(ship);
+
+          explosion = level._explosions[level._explosions[0].active ? 1 : 0];
+
+          explosion.start(ship);
           if (ship.jankiness) {
             level.jankyShips--;
           }
@@ -124,10 +128,13 @@
         level._shot.needsResolving = false;
       }
 
-      if (level._explosion.active) {
-        level._explosion.tick(timePassed);
-        if (level._explosion.active) {
-          level._explosion.draw(context);
+      for (i = 0, len = level._explosions.length; i < len; i++) {
+        explosion = level._explosions[i];
+        if (explosion.active) {
+          explosion.tick(timePassed);
+          if (explosion.active) {
+            explosion.draw(context);
+          }
         }
       }
 
