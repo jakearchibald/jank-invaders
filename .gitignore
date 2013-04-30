@@ -3,3 +3,4 @@ www/static/js/all.js
 .sass-cache
 www/static/css/all.css
 build
+*.js.map

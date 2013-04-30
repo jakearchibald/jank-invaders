@@ -54,11 +54,14 @@ module.exports = function(grunt) {
       options: {
         mangle: {
           except: []
-        }
+        },
+        sourceMap: 'www/static/js/all.js.map',
+        sourceMappingURL: '/static/js/all.js.map',
+        sourceMapPrefix: 3
       },
       all: {
         files: {
-          'www/static/js/all.js': 'www/static/js/all.js'
+          'www/static/js/all.js': '<%= meta.jsfiles %>'
         }
       }
     },
@@ -102,7 +105,7 @@ module.exports = function(grunt) {
     require('./build-static.js')(done);
   });
 
-  grunt.registerTask('dev', ['concat', 'sass:dev', 'server', 'watch']);
+  grunt.registerTask('dev', ['uglify', 'sass:dev', 'server', 'watch']);
   grunt.registerTask('build', ['concat', 'uglify', 'sass:dist', 'server', 'buildStatic']);
 
 };
