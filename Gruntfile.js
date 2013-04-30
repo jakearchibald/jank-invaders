@@ -14,6 +14,7 @@ module.exports = function(grunt) {
         'www/static/js/q.js',
         'www/static/js/ji/index.js',
         'www/static/js/ji/Ship.js',
+        'www/static/js/ji/Shot.js',
         'www/static/js/ji/Level.js',
         'www/static/js/main.js'
       ]

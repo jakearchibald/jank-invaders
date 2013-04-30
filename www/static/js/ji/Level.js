@@ -9,6 +9,7 @@
     this._canvas = canvas;
     this._context = canvas.getContext('2d');
     this._ships = [];
+    this._shot = new ji.Shot();
     // store clicks here
     this._pendingClick = null;
     // at the end of a level, the ships warp away
@@ -34,6 +35,9 @@
       ship.jankiness = i < this.jankyShips ? this.jankiness : 0;
       this._ships.push(ship);
     }
+
+    this._shot.stageWidth = this._canvas.width;
+    this._shot.stageHeight = this._canvas.height;
 
     this._canvas.addEventListener('click', this._onCanvasClick.bind(this));
 
@@ -71,7 +75,10 @@
       context.clearRect(0, 0, level._canvas.width, level._canvas.height);
 
       if (level._pendingClick) {
-        ship = level._getIntersectingShip(level._pendingClick.clientX, level._pendingClick.clientY, 1, 1);
+        if (!level._shot.active) {
+          level._shot.fire(level._pendingClick.clientX, level._pendingClick.clientY);
+        }
+        /*ship = level._getIntersectingShip(level._pendingClick.clientX, level._pendingClick.clientY, 1, 1);
         if (ship) {
           ship.active = false;
           if (ship.jankiness) {
@@ -87,7 +94,7 @@
             }
           }
           console.log("Normal", level.normalShips, "Janky", level.jankyShips);
-        }
+        }*/
         level._pendingClick = null;
       }
       
@@ -101,6 +108,25 @@
           if (ship.active) {
             context.drawImage(ship.sprite, ship.renderX, ship.y);
           }
+        }
+      }
+
+      if (level._shot.active) {
+        level._shot.tick(timePassed);
+        if (level._shot.active) {
+          context.fillStyle = '#f00';
+          context.beginPath();
+          context.moveTo(level._shot.leftShotPoints[0], level._shot.leftShotPoints[1]);
+          context.lineTo(level._shot.leftShotPoints[2], level._shot.leftShotPoints[3]);
+          context.lineTo(level._shot.leftShotPoints[4], level._shot.leftShotPoints[5]);
+          context.lineTo(level._shot.leftShotPoints[6], level._shot.leftShotPoints[7]);
+          context.closePath();
+          context.moveTo(level._shot.rightShotPoints[0], level._shot.rightShotPoints[1]);
+          context.lineTo(level._shot.rightShotPoints[2], level._shot.rightShotPoints[3]);
+          context.lineTo(level._shot.rightShotPoints[4], level._shot.rightShotPoints[5]);
+          context.lineTo(level._shot.rightShotPoints[6], level._shot.rightShotPoints[7]);
+          context.closePath();
+          context.fill();
         }
       }
 
