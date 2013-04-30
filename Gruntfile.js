@@ -88,7 +88,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: '<%= meta.jsfiles %>',
-        tasks: ['uglify']
+        tasks: ['concat']
       },
       styles: {
         files: 'www/static/css/*.scss',
@@ -106,7 +106,7 @@ module.exports = function(grunt) {
     require('./build-static.js')(done);
   });
 
-  grunt.registerTask('dev', ['uglify', 'sass:dev', 'server', 'watch']);
+  grunt.registerTask('dev', ['concat', 'sass:dev', 'server', 'watch']);
   grunt.registerTask('build', ['concat', 'uglify', 'sass:dist', 'server', 'buildStatic']);
 
 };
