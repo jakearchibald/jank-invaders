@@ -88,5 +88,9 @@
     }
   };
 
+  ShipProto.draw = function(context) {
+    context.drawImage(this.sprite, this.renderX, this.y);
+  };
+
   ji.Ship = Ship;
 })();
