@@ -78,23 +78,6 @@
         if (!level._shot.active) {
           level._shot.fire(level._pendingClick.clientX, level._pendingClick.clientY);
         }
-        /*ship = level._getIntersectingShip(level._pendingClick.clientX, level._pendingClick.clientY, 1, 1);
-        if (ship) {
-          ship.active = false;
-          if (ship.jankiness) {
-            level.jankyShips--;
-          }
-          else {
-            level.normalShips--;
-          }
-          if (!level.jankyShips || !level.normalShips) {
-            level._warpAway = true;
-            for (i = 0, len = level._ships.length; i < len; i++) {
-              level._ships[i].loop = false;
-            }
-          }
-          console.log("Normal", level.normalShips, "Janky", level.jankyShips);
-        }*/
         level._pendingClick = null;
       }
       
@@ -114,7 +97,7 @@
       if (level._shot.active) {
         level._shot.tick(timePassed);
         if (level._shot.active) {
-          context.fillStyle = 'rgba(255, 50, 0, 0.8)';
+          context.fillStyle = 'rgba(255, 50, 0, 1)';
           context.beginPath();
           context.moveTo(level._shot.leftShotPoints[0], level._shot.leftShotPoints[1]);
           context.lineTo(level._shot.leftShotPoints[2], level._shot.leftShotPoints[3]);
@@ -128,6 +111,27 @@
           context.closePath();
           context.fill();
         }
+      }
+
+      if (level._shot.needsResolving) {
+        ship = level._getIntersectingShip(level._shot.x, level._shot.y, 1, 1);
+        if (ship) {
+          ship.active = false;
+          if (ship.jankiness) {
+            level.jankyShips--;
+          }
+          else {
+            level.normalShips--;
+          }
+          if (!level.jankyShips || !level.normalShips) {
+            level._warpAway = true;
+            for (i = 0, len = level._ships.length; i < len; i++) {
+              level._ships[i].loop = false;
+            }
+          }
+          console.log("Normal", level.normalShips, "Janky", level.jankyShips);
+        }
+        level._shot.needsResolving = false;
       }
 
       requestAnimationFrame(frame);
