@@ -43,6 +43,7 @@
     for (var i = this._ships.length; i--;) { // loop backwards to get topmost ship
       ship = this._ships[i];
       if (
+        ship.active &&
         x < ship.x + ship.width &&
         y < ship.y + ship.height &&
         x + width > ship.x &&
