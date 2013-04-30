@@ -114,7 +114,7 @@
       if (level._shot.active) {
         level._shot.tick(timePassed);
         if (level._shot.active) {
-          context.fillStyle = '#f00';
+          context.fillStyle = 'rgba(255, 50, 0, 0.8)';
           context.beginPath();
           context.moveTo(level._shot.leftShotPoints[0], level._shot.leftShotPoints[1]);
           context.lineTo(level._shot.leftShotPoints[2], level._shot.leftShotPoints[3]);

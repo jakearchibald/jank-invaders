@@ -1,6 +1,6 @@
 (function() {
   var startHeight = 300;
-  var duration = 3000;
+  var duration = 300;
 
   function Shot() {
     this.stageWidth = 0;
