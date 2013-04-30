@@ -15,6 +15,7 @@ module.exports = function(grunt) {
         'www/static/js/ji/index.js',
         'www/static/js/ji/Ship.js',
         'www/static/js/ji/Shot.js',
+        'www/static/js/ji/Explosion.js',
         'www/static/js/ji/Level.js',
         'www/static/js/main.js'
       ]
@@ -87,7 +88,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: '<%= meta.jsfiles %>',
-        tasks: ['concat']
+        tasks: ['uglify']
       },
       styles: {
         files: 'www/static/css/*.scss',

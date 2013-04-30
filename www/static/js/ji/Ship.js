@@ -76,7 +76,7 @@
 
     if (this.x > this.xMax) {
       if (this.loop) {
-        this.x = -this.width;
+        this.x = (this.x + this.width) % (this.xMax + this.width) - this.width;
       }
       else {
         this.active = false;
