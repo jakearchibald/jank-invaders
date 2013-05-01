@@ -61,7 +61,11 @@
   };
 
   Ship.random = function() {
-    var sprite = shipSprites[Math.floor(Math.random() * shipSprites.length)];
+    return Ship.fromSprite(Math.floor(Math.random() * shipSprites.length));
+  };
+
+  Ship.fromSprite = function(i) {
+    var sprite = shipSprites[i];
     var ship = new Ship();
     ship.sprite = sprite;
     ship.width = sprite.width;
