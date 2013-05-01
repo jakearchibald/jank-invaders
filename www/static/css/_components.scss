@@ -24,14 +24,19 @@
   position: absolute;
   top: 0;
   left: 0;
-  border: 20px solid #2C45A8;
   padding: 20px;
-  color: #fff;
-  background: #333;
+  background: url(imgs/metal.jpg);
+  background-size: cover;
   box-shadow: 0 13px 40px #000;
   width: 640px;
   line-height: 1.4;
   display: none;
+
+  & .inner {
+    padding: 20px;
+    background: rgba(#fff, 0.7);
+    box-shadow: 0 2px 7px rgba(#000, 0.6);
+  }
 
   & .ship-demo {
     display: block;
@@ -43,6 +48,11 @@
   & .go-row {
     margin-top: 15px;
     text-align: center;
+  }
+
+  & .begin {
+    font-size: 22px;
+    line-height: 34px;
   }
 
   & h1 {
