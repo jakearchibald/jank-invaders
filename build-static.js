@@ -44,11 +44,18 @@ function mkdirDeep(pathToMake) {
 
 module.exports = function(done) {
   // remove current dir
-  if (fs.existsSync('build')) {
-    fs.rmdir('build');
-  }
-
-  mkdirDeep('build');
+  fs.readdirSync('build').forEach(function(file) {
+    if (file[0] == '.') { return; }
+    file = 'build/' + file;
+    console.log(file);
+    var stat = fs.statSync(file);
+    if (stat.isDirectory()) {
+      fs.rmdirSync(file);
+    }
+    else {
+      fs.unlinkSync(file);
+    }
+  });
 
   var promises = manifest.map(function(urlPath) {
     var pathParts = urlPath.split('/').slice(1);
