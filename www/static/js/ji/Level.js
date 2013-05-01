@@ -11,6 +11,7 @@
     this._ships = [];
     this._shot = new ji.Shot();
     this._explosions = [new ji.Explosion(), new ji.Explosion()];
+    this._flash = new ji.Flash();
     // store clicks here
     this._pendingClick = null;
     // at the end of a level, the ships warp away
@@ -45,6 +46,9 @@
 
     this._shot.stageWidth = this._canvas.width;
     this._shot.stageHeight = this._canvas.height;
+
+    this._flash.width = this._canvas.width;
+    this._flash.height = this._canvas.height;
 
     this._canvas.addEventListener('touchstart', this._onCanvasClick);
     this._canvas.addEventListener('mousedown', this._onCanvasClick);
@@ -103,6 +107,13 @@
         }
         level._pendingClick = null;
       }
+
+      if (level._flash.active) {
+        level._flash.tick(timePassed);
+        if (level._flash.active) {
+          level._flash.draw(context);
+        }
+      }
       
       for (i = 0, len = level._ships.length; i < len; i++) {
         ship = level._ships[i];
@@ -136,15 +147,13 @@
 
           if (ship.jankiness) {
             level.jankyShips--;
+            level._flash.flash(0, 180, 0);
             level._remainingEl.textContent = level.jankyShips;
           }
           else {
             level.normalShips--;
             level._innocentsKilled++;
-            level._timeEl.style.color = 'red';
-            ji.utils.transition(level._timeEl, {
-              color: 'black'
-            }, 1);
+            level._flash.flash(255, 0, 0);
             level._scoreTime += 10 * 1000; // time penalty
           }
           if (!level.jankyShips || !level.normalShips) {
