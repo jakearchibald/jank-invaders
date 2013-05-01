@@ -37,8 +37,9 @@
   & .ship-demo {
     display: block;
     width: 100%;
-    height: 100px;
+    height: 110px;
     -webkit-transform: translateZ(0); // makes things faster on the pixel
+    background: rgba(#000, 0.2);
   }
 
   & .go-row {

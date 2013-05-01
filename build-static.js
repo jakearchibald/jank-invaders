@@ -1,6 +1,27 @@
 // All the files needed for the static version
 var manifest = [
-  // urls go here
+  '/',
+  '/static/css/all.css',
+  '/static/css/fonts/akashi.ttf',
+  '/static/css/imgs/metal.jpg',
+  '/static/css/imgs/nebula.jpg',
+  '/static/css/imgs/stars.png',
+  '/static/js/all.js',
+  '/static/js/all.js.map',
+  '/static/js/q.js',
+  '/static/js/EventEmitter.js',
+  '/static/js/ji/index.js',
+  '/static/js/ji/utils.js',
+  '/static/js/ji/Ship.js',
+  '/static/js/ji/Flash.js',
+  '/static/js/ji/Shot.js',
+  '/static/js/ji/Explosion.js',
+  '/static/js/ji/Level.js',
+  '/static/js/ji/Intro.js',
+  '/static/js/ji/Summary.js',
+  '/static/js/main.js',
+  '/static/imgs/particle-sprites.png',
+  '/static/imgs/ships.png'
 ];
 var server = 'http://localhost:3000';
 
