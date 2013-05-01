@@ -28,7 +28,7 @@
   color: #fff;
   background: #333;
   box-shadow: 0 13px 40px #000;
-  width: 420px;
+  width: 640px;
   line-height: 1.4;
   display: none;
 
@@ -36,6 +36,7 @@
     display: block;
     width: 100%;
     height: 95px;
+    -webkit-transform: translateZ(0); // makes things faster on the pixel
   }
 
   & h1 {

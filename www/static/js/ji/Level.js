@@ -41,12 +41,14 @@
     this._shot.stageWidth = this._canvas.width;
     this._shot.stageHeight = this._canvas.height;
 
+    this._canvas.addEventListener('touchstart', this._onCanvasClick);
     this._canvas.addEventListener('mousedown', this._onCanvasClick);
 
     this._gameLoop();
   };
 
   LevelProto._end = function() {
+    this._canvas.removeEventListener('touchstart', this._onCanvasClick);
     this._canvas.removeEventListener('mousedown', this._onCanvasClick);
     this.trigger('end');
   };
@@ -163,7 +165,12 @@
   };
 
   LevelProto._onCanvasClick = function(event) {
-    this._pendingClick = event;
+    if (event.touches) {
+      this._pendingClick = event.touches[0];
+    }
+    else {
+      this._pendingClick = event;
+    }
     event.preventDefault();
   };
 
