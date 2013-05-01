@@ -12,6 +12,7 @@ module.exports = function(grunt) {
     meta: {
       jsfiles: [
         'www/static/js/q.js',
+        'www/static/js/EventEmitter.js',
         'www/static/js/ji/index.js',
         'www/static/js/ji/Ship.js',
         'www/static/js/ji/Shot.js',

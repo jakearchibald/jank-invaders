@@ -15,9 +15,11 @@
     this._pendingClick = null;
     // at the end of a level, the ships warp away
     this._warpAway = false;
+
+    this._onCanvasClick = this._onCanvasClick.bind(this);
   }
 
-  var LevelProto = Level.prototype;
+  var LevelProto = Level.prototype = Object.create(EventEmitter.prototype);
 
   LevelProto.play = function() {
     var ship;
@@ -28,7 +30,6 @@
       do {
         ship.y = Math.random() * (this._canvas.height - ship.height);
         ship.x = -ship.width - Math.random() * this._canvas.width;
-
         if (shipPlacementTries) { shipPlacementTries--; }
       } while (shipPlacementTries && this._getIntersectingShip(ship.x, ship.y, ship.width, ship.height));
       ship.xMax = this._canvas.width;
@@ -40,9 +41,14 @@
     this._shot.stageWidth = this._canvas.width;
     this._shot.stageHeight = this._canvas.height;
 
-    this._canvas.addEventListener('click', this._onCanvasClick.bind(this));
+    this._canvas.addEventListener('mousedown', this._onCanvasClick);
 
     this._gameLoop();
+  };
+
+  LevelProto._end = function() {
+    this._canvas.removeEventListener('mousedown', this._onCanvasClick);
+    this.trigger('end');
   };
 
   LevelProto._getIntersectingShip = function(x, y, width, height) {
@@ -72,6 +78,7 @@
       var ship;
       var explosion;
       var i;
+      var somethingActive = false;
 
       lastTime = time;
       context.clearRect(0, 0, level._canvas.width, level._canvas.height);
@@ -91,6 +98,7 @@
           }
           ship.tick(timePassed);
           if (ship.active) {
+            somethingActive = true;
             ship.draw(context);
           }
         }
@@ -99,6 +107,7 @@
       if (level._shot.active) {
         level._shot.tick(timePassed);
         if (level._shot.active) {
+          somethingActive = true;
           level._shot.draw(context);
         }
       }
@@ -109,8 +118,8 @@
           ship.active = false;
 
           explosion = level._explosions[level._explosions[0].active ? 1 : 0];
-
           explosion.start(ship);
+
           if (ship.jankiness) {
             level.jankyShips--;
           }
@@ -133,12 +142,18 @@
         if (explosion.active) {
           explosion.tick(timePassed);
           if (explosion.active) {
+            somethingActive = true;
             explosion.draw(context);
           }
         }
       }
 
-      requestAnimationFrame(frame);
+      if (somethingActive) {
+        requestAnimationFrame(frame);
+      }
+      else {
+        level._end();
+      }
     }
 
     requestAnimationFrame(function(time) {
