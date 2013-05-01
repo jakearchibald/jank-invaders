@@ -36,8 +36,8 @@
     }
   };
 
-  var spikeParticles = 600;
-  var explosiveParticles = 400;
+  var spikeParticles = 400;
+  var explosiveParticles = 200;
 
   function Explosion() {
     this.x = 0;
@@ -143,7 +143,7 @@
       particle.active = true;
       particle.activeTime = 0;
       particle.fadeTime = 400 + Math.random() * 300;
-      particle.scale = Math.random() * 2 + 0.2;
+      particle.scale = Math.random() * 3 + 0.5;
       particle.tick(50);
     }
   };
