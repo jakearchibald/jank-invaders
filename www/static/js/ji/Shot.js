@@ -95,15 +95,15 @@
   ShotProto.draw = function(context) {
     context.fillStyle = 'rgba(255, 50, 0, 1)';
     context.beginPath();
-    context.moveTo(level._shot.leftShotPoints[0], level._shot.leftShotPoints[1]);
-    context.lineTo(level._shot.leftShotPoints[2], level._shot.leftShotPoints[3]);
-    context.lineTo(level._shot.leftShotPoints[4], level._shot.leftShotPoints[5]);
-    context.lineTo(level._shot.leftShotPoints[6], level._shot.leftShotPoints[7]);
+    context.moveTo(this.leftShotPoints[0], this.leftShotPoints[1]);
+    context.lineTo(this.leftShotPoints[2], this.leftShotPoints[3]);
+    context.lineTo(this.leftShotPoints[4], this.leftShotPoints[5]);
+    context.lineTo(this.leftShotPoints[6], this.leftShotPoints[7]);
     context.closePath();
-    context.moveTo(level._shot.rightShotPoints[0], level._shot.rightShotPoints[1]);
-    context.lineTo(level._shot.rightShotPoints[2], level._shot.rightShotPoints[3]);
-    context.lineTo(level._shot.rightShotPoints[4], level._shot.rightShotPoints[5]);
-    context.lineTo(level._shot.rightShotPoints[6], level._shot.rightShotPoints[7]);
+    context.moveTo(this.rightShotPoints[0], this.rightShotPoints[1]);
+    context.lineTo(this.rightShotPoints[2], this.rightShotPoints[3]);
+    context.lineTo(this.rightShotPoints[4], this.rightShotPoints[5]);
+    context.lineTo(this.rightShotPoints[6], this.rightShotPoints[7]);
     context.closePath();
     context.fill();
   };
