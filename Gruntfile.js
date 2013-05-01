@@ -20,6 +20,7 @@ module.exports = function(grunt) {
         'www/static/js/ji/Explosion.js',
         'www/static/js/ji/Level.js',
         'www/static/js/ji/Intro.js',
+        'www/static/js/ji/Summary.js',
         'www/static/js/main.js'
       ]
     },

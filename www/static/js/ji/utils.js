@@ -106,5 +106,14 @@
     return deferred.promise;
   };
 
+  utils.formatTime = function(ms) {
+    var mins = Math.floor(ms / (1000 * 60));
+    ms = ms % (1000 * 60);
+    var secs = Math.floor(ms / 1000);
+    var rest = Math.floor(ms % 1000);
+
+    return mins + ':' + (secs < 10 ? '0' + secs : secs) + '.' + (rest < 10 ? '00' + rest : rest < 100 ? '0' + rest : rest);
+  };
+
   ji.utils = utils;
 })();

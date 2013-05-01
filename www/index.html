@@ -9,21 +9,34 @@
 <body>
   <div class="container">
     <canvas class="level-canvas"></canvas>
-    <div class="intro">
+    <div class="metal-box level-ui">
+      <div class="inner">
+        <div class="time">
+          Time
+          <div class="num">0:00.000</div>
+        </div>
+        <div class="spies">
+          Spies
+          <div class="num">0</div>
+        </div>
+      </div>
+    </div>
+    <div class="metal-box intro">
       <div class="inner">
         <h1>Jank Invaders</h1>
         <p>
           Oh noes! Our intergalactic space fleet
           has been infiltrated by ships of inferior
-          framerate!
+          framerate! Watch closely, and blast the
+          spies to pieces as quickly as possible! 
         </p>
         <p>
-          Watch closely, and blast the spies to pieces!
           The good guys move like this:
         </p>
         <canvas class="good-guys ship-demo"></canvas>
         <p>
-          The bad guys move like this:
+          Don't shoot those or you'll get a 10 second
+          penalty. The bad guys move like this:
         </p>
         <canvas class="bad-guys ship-demo"></canvas>
         <div class="go-row">
@@ -31,19 +44,18 @@
         </div>
       </div>
     </div>
-    <div class="level-ui">
-      <div class="score">
-        Score:
-        <div class="num">0</div>
-      </div>
-      <div class="left">
-        Remaining:
-        <div class="num">0</div>
+    <div class="metal-box summary">
+      <div class="inner">
+        <h1>You did it in <span class="time">0:00.000</span>!</h1>
+        <p class="msg"></p>
+        <div class="go-row">
+          <button class="restart btn btn2">Restart</button>
+        </div>
       </div>
     </div>
-    <div class="level-intro">
+    <!--<div class="level-intro">
       
-    </div>
+    </div>-->
   </div>
 	<script src="/static/js/all.js"></script>
 </body>

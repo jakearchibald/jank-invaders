@@ -3,8 +3,12 @@
     var intro = this;
     this._el = document.querySelector('.intro');
     this.active = false;
-    this._goodShip = ji.Ship.fromSprite(3);
-    this._badShip = ji.Ship.fromSprite(3);
+    this._goodShips = [0, 1, 2, 3].map(function(i) {
+      return ji.Ship.fromSprite(i);
+    });
+    this._badShips = [0, 1, 2, 3].map(function(i) {
+      return ji.Ship.fromSprite(i);
+    });
     this._goodCanvas = this._el.querySelector('.good-guys');
     this._badCanvas = this._el.querySelector('.bad-guys');
 
@@ -53,26 +57,44 @@
     var intro = this;
     var goodContext = this._goodCanvas.getContext('2d');
     var badContext = this._badCanvas.getContext('2d');
+    var startX = 0;
 
-    intro._badShip.x = intro._goodShip.x = -intro._goodShip.width;
-    intro._badShip.y = intro._goodShip.y = 0;
-    intro._badShip.xMax = intro._goodShip.xMax = intro._goodCanvas.width;
-    intro._badShip.xVel = intro._goodShip.xVel = 100;
+    function setupShip(ship) {
+      startX -= ship.width;
+      ship.x = startX;
+      ship.y = intro._goodCanvas.height/2 - ship.height/2;
+      ship.xMax = intro._goodCanvas.width;
+      ship.xVel = 100;
+      startX -= 20;
+    }
 
-    intro._badShip.jankiness = 0.1;
+    this._goodShips.forEach(setupShip);
+    startX = 0;
+
+    this._badShips.forEach(function(ship) {
+      setupShip(ship);
+      ship.jankiness = 0.2;
+    });
 
     function frame(time) {
       var timePassed = time - lastTime;
+      var ship;
       lastTime = time;
 
       goodContext.clearRect(0, 0, intro._goodCanvas.width, intro._goodCanvas.height);
       badContext.clearRect(0, 0, intro._badCanvas.width, intro._badCanvas.height);
 
-      intro._goodShip.tick(timePassed);
-      intro._badShip.tick(timePassed);
+      for (var i = intro._goodShips.length; i--;) {
+        ship = intro._goodShips[i];
+        ship.tick(timePassed);
+        ship.draw(goodContext);
+      }
 
-      intro._goodShip.draw(goodContext);
-      intro._badShip.draw(badContext);
+      for (i = intro._badShips.length; i--;) {
+        ship = intro._badShips[i];
+        ship.tick(timePassed);
+        ship.draw(badContext);
+      }
 
       if (intro.active) {
         requestAnimationFrame(frame);
@@ -92,7 +114,7 @@
     var containerHeight = container.offsetHeight;
     var introWidth = this._el.offsetWidth;
     var introHeight = this._el.offsetHeight;
-    var end = 'translate(' + (containerWidth/2 - introWidth/2) + 'px, ' + containerHeight + 'px)';
+    var end = 'translate(' + (containerWidth/2 - introWidth/2) + 'px, ' + (containerHeight + 2) + 'px)';
 
     return ji.utils.transition(this._el, {
       transform: end

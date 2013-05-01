@@ -4,7 +4,7 @@
     this.jankyShips = 10;
     this.speed = 100;
     this.speedVariance = 50;
-    this.jankiness = 0.1;
+    this.jankiness = 0.2;
 
     this._canvas = canvas;
     this._context = canvas.getContext('2d');
@@ -15,6 +15,11 @@
     this._pendingClick = null;
     // at the end of a level, the ships warp away
     this._warpAway = false;
+
+    this._scoreTime = 0;
+    this._innocentsKilled = 0;
+    this._timeEl = document.querySelector('.level-ui .time .num');
+    this._remainingEl = document.querySelector('.level-ui .spies .num');
 
     this._onCanvasClick = this._onCanvasClick.bind(this);
   }
@@ -28,7 +33,7 @@
     for (var i = this.normalShips + this.jankyShips; i--;) {
       ship = ji.Ship.random();
       do {
-        ship.y = Math.random() * (this._canvas.height - ship.height);
+        ship.y = Math.random() * (this._canvas.height - ship.height - 80); // 80 for the ui
         ship.x = -ship.width - Math.random() * this._canvas.width;
         if (shipPlacementTries) { shipPlacementTries--; }
       } while (shipPlacementTries && this._getIntersectingShip(ship.x, ship.y, ship.width, ship.height));
@@ -44,13 +49,19 @@
     this._canvas.addEventListener('touchstart', this._onCanvasClick);
     this._canvas.addEventListener('mousedown', this._onCanvasClick);
 
+    this._remainingEl.textContent = this.jankyShips;
+    this._timeEl.textContent = '0:00.000';
+
     this._gameLoop();
   };
 
   LevelProto._end = function() {
     this._canvas.removeEventListener('touchstart', this._onCanvasClick);
     this._canvas.removeEventListener('mousedown', this._onCanvasClick);
-    this.trigger('end');
+    this.trigger('end', {
+      time: this._scoreTime,
+      innocentsKilled: this._innocentsKilled
+    });
   };
 
   LevelProto._getIntersectingShip = function(x, y, width, height) {
@@ -81,6 +92,7 @@
       var explosion;
       var i;
       var somethingActive = false;
+
 
       lastTime = time;
       context.clearRect(0, 0, level._canvas.width, level._canvas.height);
@@ -124,9 +136,16 @@
 
           if (ship.jankiness) {
             level.jankyShips--;
+            level._remainingEl.textContent = level.jankyShips;
           }
           else {
             level.normalShips--;
+            level._innocentsKilled++;
+            level._timeEl.style.color = 'red';
+            ji.utils.transition(level._timeEl, {
+              color: 'black'
+            }, 1);
+            level._scoreTime += 10 * 1000; // time penalty
           }
           if (!level.jankyShips || !level.normalShips) {
             level._warpAway = true;
@@ -148,6 +167,11 @@
             explosion.draw(context);
           }
         }
+      }
+
+      if (level.jankyShips) {
+        level._scoreTime += timePassed;
+        level._timeEl.textContent = ji.utils.formatTime(level._scoreTime);
       }
 
       if (somethingActive) {
