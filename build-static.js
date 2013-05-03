@@ -42,15 +42,27 @@ function mkdirDeep(pathToMake) {
   }, __dirname);
 }
 
+function deleteDir(path) {
+  if(fs.existsSync(path)) {
+    fs.readdirSync(path).forEach(function(file,index){
+      var curPath = path + "/" + file;
+      if(fs.statSync(curPath).isDirectory()) { // recurse
+        deleteDir(curPath);
+      } else { // delete file
+        fs.unlinkSync(curPath);
+      }
+    });
+    fs.rmdirSync(path);
+  }
+}
+
 module.exports = function(done) {
   // remove current dir
   fs.readdirSync('build').forEach(function(file) {
     if (file[0] == '.') { return; }
     file = 'build/' + file;
-    console.log(file);
-    var stat = fs.statSync(file);
-    if (stat.isDirectory()) {
-      fs.rmdirSync(file);
+    if (fs.statSync(file).isDirectory()) {
+      deleteDir(file);
     }
     else {
       fs.unlinkSync(file);

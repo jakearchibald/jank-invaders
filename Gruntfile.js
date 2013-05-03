@@ -62,7 +62,7 @@ module.exports = function(grunt) {
           except: []
         },
         sourceMap: 'www/static/js/all.js.map',
-        sourceMappingURL: '/static/js/all.js.map',
+        sourceMappingURL: 'all.js.map',
         sourceMapPrefix: 3
       },
       all: {
