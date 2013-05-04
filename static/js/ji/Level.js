@@ -162,7 +162,6 @@
               level._ships[i].loop = false;
             }
           }
-          console.log("Normal", level.normalShips, "Janky", level.jankyShips);
         }
         level._shot.needsResolving = false;
       }
