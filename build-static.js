@@ -8,6 +8,7 @@ var manifest = [
   '/static/css/imgs/stars.png',
   '/static/js/all.js',
   '/static/js/all.js.map',
+  '/static/js/qrcode.js',
   '/static/js/q.js',
   '/static/js/EventEmitter.js',
   '/static/js/ji/index.js',
