@@ -8,8 +8,8 @@
     this.xVel = 0;
     this.yVel = 0;
     this.active = false;
-    this.width = 7;
-    this.height = 7;
+    this.width = 28;
+    this.height = 28;
     this.friction = 0;
     this.sprite = null;
     this.opacity = 1;
@@ -72,9 +72,9 @@
     }).then(function(img) {
       // width, height, x, y
       particleSprites = [
-        [7, 7, 1, 1],
-        [7, 7, 11, 1],
-        [7, 7, 22, 1]
+        [28, 28, 3, 3],
+        [28, 28, 37, 3],
+        [28, 28, 75, 3]
       ].map(function(rect) {
         var canvas = document.createElement('canvas');
         // adding 1px padding around element for smoother rendering (working around Chrome issue)
@@ -143,7 +143,7 @@
       particle.active = true;
       particle.activeTime = 0;
       particle.fadeTime = 400 + Math.random() * 300;
-      particle.scale = Math.random() * 3 + 0.5;
+      particle.scale = Math.random() * 0.9 + 0.1;
       particle.tick(50);
     }
   };
