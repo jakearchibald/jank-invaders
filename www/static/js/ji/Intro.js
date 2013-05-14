@@ -39,8 +39,8 @@
     this._badCanvas.width = this._badCanvas.offsetWidth;
     this._badCanvas.height = this._badCanvas.offsetHeight;
 
-    var start = 'translate(' + (containerWidth/2 - introWidth/2) + 'px, ' + (-introHeight) + 'px)';
-    var end = 'translate(' + (containerWidth/2 - introWidth/2) + 'px, ' + (containerHeight/2 - introHeight/2) + 'px)';
+    var start = 'translate(' + Math.floor(containerWidth/2 - introWidth/2) + 'px, ' + (-introHeight) + 'px)';
+    var end = 'translate(' + Math.floor(containerWidth/2 - introWidth/2) + 'px, ' + Math.floor(containerHeight/2 - introHeight/2) + 'px)';
     
     ji.utils.css(this._el, 'transform', start);
     ji.utils.transition(this._el, {

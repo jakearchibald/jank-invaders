@@ -32,6 +32,7 @@
     padding: 20px;
     background: rgba(#fff, 0.7);
     box-shadow: 0 2px 7px rgba(#000, 0.6);
+    position: relative;
   }
 
   & .ship-demo {
@@ -58,6 +59,12 @@
     font-size: 50px;
     text-align: center;
     margin: 0;
+  }
+
+  & .sprite-credit {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
   }
 }
 

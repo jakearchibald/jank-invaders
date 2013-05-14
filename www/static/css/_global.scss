@@ -7,3 +7,17 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+a:link,
+a:visited {
+  text-decoration: none;
+  color: #1B6AB2;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  color: #007AFF;
+}
