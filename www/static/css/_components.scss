@@ -146,3 +146,12 @@
     -webkit-transform: translateZ(0);
   }
 }
+
+.rate-warning {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 640px;
+  line-height: 1.4;
+  display: none;
+}

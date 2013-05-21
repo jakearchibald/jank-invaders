@@ -12,6 +12,7 @@
     this._shot = new ji.Shot();
     this._explosions = [new ji.Explosion(), new ji.Explosion()];
     this._flash = new ji.Flash();
+    this._fpsWarning = new ji.FpsWarning();
     // store clicks here
     this._pendingClick = null;
     // at the end of a level, the ships warp away
@@ -176,6 +177,8 @@
           }
         }
       }
+
+      level._fpsWarning.tick(timePassed);
 
       if (level.jankyShips) {
         level._scoreTime += timePassed;
