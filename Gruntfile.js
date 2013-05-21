@@ -11,7 +11,6 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     meta: {
       jsfiles: [
-        'www/static/js/qrcode.js',
         'www/static/js/q.js',
         'www/static/js/EventEmitter.js',
         'www/static/js/ji/index.js',
