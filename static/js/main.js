@@ -1,4 +1,8 @@
 (function() {
+  window.requestAnimationFrame = window.requestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.webkitRequestAnimationFrame;
+
   var canvas = document.querySelector('.level-canvas');
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;

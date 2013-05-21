@@ -4,7 +4,6 @@
     this._el = document.querySelector('.summary');
     this._timeEl = this._el.querySelector('.time');
     this._msgEl = this._el.querySelector('.msg');
-    this._qrEl = this._el.querySelector('.qr');
 
     this._el.querySelector('.restart').addEventListener('click', function(event) {
       if (summary.active) {
@@ -22,9 +21,8 @@
   SummaryProto.show = function(details) {
     this._el.style.display = 'block';
     var container = this._el.parentNode;
-    var time = ji.utils.formatTime(details.time);
 
-    this._timeEl.textContent = time;
+    this._timeEl.textContent = ji.utils.formatTime(details.time);
 
     if (details.innocentsKilled > 10) {
       this._msgEl.textContent = "Traitor! You destroyed more of your own fleet than the janky spies!";
@@ -33,7 +31,7 @@
       this._msgEl.textContent = "Hmm, you took out quite a few of your own ships. You need to be better at spotting jank.";
     }
     else if (details.time < 1000 * 15) {
-      this._msgEl.textContent = "Wow! That's better than the author of the game ever managed! You're a gifted individual!";
+      this._msgEl.textContent = "Wow! You're a gifted individual! You could shoot badly performing spacecraft professionally.";
     }
     else if (details.time < 1000 * 20) {
       this._msgEl.textContent = "Brilliant, you're one of the best! You need to be a few seconds quicker to be the very best though.";
@@ -56,14 +54,6 @@
     else {
       this._msgEl.textContent = "I assume you fell asleep half way through?";
     }
-
-    var qr = qrcode(8, 'L');
-    qr.addData("https://twitter.com/intent/tweet?" +
-      "text=" + encodeURIComponent("I completed the Jank-Invaders Chrome experiment in " + time) + "&" +
-      "url=" + encodeURIComponent("http://jakearchibald.github.io/jank-invaders/")
-    );
-    qr.make();
-    this._qrEl.innerHTML = qr.createImgTag(4, 0);
 
     var containerWidth = container.offsetWidth;
     var containerHeight = container.offsetHeight;
