@@ -31,7 +31,7 @@
       this._msgEl.textContent = "Hmm, you took out quite a few of your own ships. You need to be better at spotting jank.";
     }
     else if (details.time < 1000 * 15) {
-      this._msgEl.textContent = "Wow! That's better than the author of the game ever managed! You're a gifted individual!";
+      this._msgEl.textContent = "Wow! You're a gifted individual! You could shoot badly performing spacecraft professionally.";
     }
     else if (details.time < 1000 * 20) {
       this._msgEl.textContent = "Brilliant, you're one of the best! You need to be a few seconds quicker to be the very best though.";

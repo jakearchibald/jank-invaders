@@ -3,6 +3,10 @@
   src: url(fonts/akashi.ttf);
 }
 
+html {
+  overflow: hidden;
+}
+
 html, body {
   margin: 0;
   padding: 0;
